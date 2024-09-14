@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package article;
+option go_package = "./pb";
+
+
+message ArticleCreateRequest{
+  string title =1;
+  string content =2;
+  repeated Tag tags = 3;
+  optional bytes image = 4;
+
+
+}
+message Tag{
+  string tag =1;
+}
+
+message ArticleCreateResponse{
+  string articleId =1;
+}
+
+service ArticleService {
+  rpc Create (ArticleCreateRequest) returns (ArticleCreateResponse);
+}
