@@ -2,21 +2,22 @@ package handler
 
 import (
 	"context"
+	"github.com/satoshisyohu/pomodoro/pkg/usecases"
 	pb "github.com/satoshisyohu/pomodoro/proto/post"
 )
 
 // PostHandler handler for post
 type PostHandler struct {
 	pb.UnimplementedPostServiceServer
+	u usecases.IPostCrateInteractor
 }
 
 // NewPostHandler factory function
-func NewPostHandler() *PostHandler {
-	return &PostHandler{}
+func NewPostHandler(u usecases.IPostCrateInteractor) *PostHandler {
+	return &PostHandler{u: u}
 }
 
 // Create crate post
-func (h *PostHandler) Create(_ context.Context, _ *pb.PostCreateRequest) (*pb.PostCreateResponse, error) {
-	// todo usecaseの呼び出し
-	return &pb.PostCreateResponse{}, nil
+func (p *PostHandler) Create(ctx context.Context, req *pb.PostCreateRequest) (*pb.PostCreateResponse, error) {
+	return p.u.Run(ctx, req)
 }

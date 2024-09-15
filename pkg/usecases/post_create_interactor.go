@@ -24,11 +24,14 @@ func NewPostCreateInteractor(db *gorm.DB,
 	}
 }
 
-func (aci *PostCreateInteractor) Run(ctx context.Context, req *pb.PostCreateRequest) (*pb.PostCreateResponse, error) {
+type IPostCrateInteractor interface {
+	Run(ctx context.Context, req *pb.PostCreateRequest) (*pb.PostCreateResponse, error)
+}
+
+func (pci *PostCreateInteractor) Run(ctx context.Context, req *pb.PostCreateRequest) (*pb.PostCreateResponse, error) {
 	var postId *string
-	err := aci.db.Transaction(func(tx *gorm.DB) error {
-		// レコードを登録する
-		err, p := aci.ps.Create(tx, req, "dummy")
+	err := pci.db.Transaction(func(tx *gorm.DB) error {
+		err, p := pci.ps.Create(tx, req, "dummy")
 		if err != nil {
 			return err
 		}
@@ -37,7 +40,7 @@ func (aci *PostCreateInteractor) Run(ctx context.Context, req *pb.PostCreateRequ
 		}
 		if len(req.Tags) > 0 {
 			// tag分リクエストを作成してレコードを登録する
-			if err = aci.pts.Create(tx, req.Tags, p); err != nil {
+			if err = pci.pts.Create(tx, req.Tags, p); err != nil {
 				return err
 			}
 		}

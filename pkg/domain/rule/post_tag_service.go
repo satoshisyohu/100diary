@@ -12,6 +12,11 @@ type PostTagService struct {
 	ptr repository.PostTagRepository
 }
 
+func NewPostTagService(tr repository.TagRepository,
+	ptr repository.PostTagRepository) *PostTagService {
+	return &PostTagService{tr: tr, ptr: ptr}
+}
+
 func (pts PostTagService) Create(tx *gorm.DB, req []*pb.Tag, postId *string) error {
 	tags := make([]*domain.Tag, 0)
 	postTags := make([]*domain.PostTag, 0)

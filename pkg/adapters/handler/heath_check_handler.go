@@ -2,18 +2,18 @@ package handler
 
 import (
 	"context"
-	"github.com/satoshisyohu/pomodoro/pkg/domain"
+	"github.com/satoshisyohu/pomodoro/pkg/domain/repository"
 	"github.com/satoshisyohu/pomodoro/proto/health"
 )
 
 // HealthCheckHandler ヘルスチェックのハンドラー
 type HealthCheckHandler struct {
 	pb.UnimplementedHealthCheckServiceServer
-	r domain.HealthCheckRepository
+	r repository.HealthCheckRepository
 }
 
 // NewHealthCheckHandler  ファクトリ関数
-func NewHealthCheckHandler(r domain.HealthCheckRepository) *HealthCheckHandler {
+func NewHealthCheckHandler(r repository.HealthCheckRepository) *HealthCheckHandler {
 	return &HealthCheckHandler{
 		r: r,
 	}
