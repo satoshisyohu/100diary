@@ -1,4 +1,4 @@
-package domain
+package repository
 
 import (
 	"github.com/satoshisyohu/pomodoro/pkg/domain/model"

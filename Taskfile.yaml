@@ -8,7 +8,7 @@ tasks:
     cmd: |
       protoc --go_out=./ --go_opt=paths=source_relative  --go-grpc_out=. --go-grpc_opt=paths=source_relative \
       proto/health/health_check_service.proto \
-      proto/article/article_service.proto
+      proto/post/post_service.proto
 #  mock-gen-uuid:
 #    cmd: mockgen -source=cmd/utils/uuid_utils.go -destination=./cmd/internal/mock/utils/uuid_utils.go -package=utils
 #  mock-gen-repo:

@@ -1,4 +1,4 @@
-package domain
+package repository
 
 // HealthCheckRepository ヘルスチェックリポジトリのインターフェース
 type HealthCheckRepository interface {

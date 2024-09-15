@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/satoshisyohu/pomodoro/pkg/domain"
+	irepository "github.com/satoshisyohu/pomodoro/pkg/domain/repository"
 	"gorm.io/gorm"
 )
 
@@ -12,7 +12,7 @@ type heathCheckRepository struct {
 
 // NewHeathCheckRepository ファクトリ関数
 
-func NewHeathCheckRepository(tx *gorm.DB) domain.HealthCheckRepository {
+func NewHeathCheckRepository(tx *gorm.DB) irepository.HealthCheckRepository {
 	return &heathCheckRepository{tx: tx}
 }
 

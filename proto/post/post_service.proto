@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package Post;
+option go_package = "./pb";
+
+
+message PostCreateRequest{
+  string title =1;
+  string content =2;
+  repeated Tag tags = 3;
+  optional string fileName = 4;
+
+  optional bytes image = 5;
+
+
+}
+message Tag{
+  string tag =1;
+}
+
+message PostCreateResponse{
+  string PostId =1;
+}
+
+service PostService {
+  rpc Create (PostCreateRequest) returns (PostCreateResponse);
+}
